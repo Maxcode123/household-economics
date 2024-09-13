@@ -24,7 +24,13 @@
                     <td>{{ transaction.description }}</td>
                     <td>{{ transaction.transaction_number }}</td>
                     <td>{{ transaction.amount }}</td>
-                    <td>{{ transaction.category.name }}</td>
+                    <td>
+                        <div>
+                            <button class='btn btn-secondary' type="submit" onClick='location.href="{% url 'update-transaction-category-view' transaction.id %}"'>
+                            {{ transaction.category.name }}        
+                            </button>
+                        </div>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

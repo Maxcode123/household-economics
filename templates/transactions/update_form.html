@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action={% url 'update-transaction-category-endpoint' transaction.id %} method="post">
+    {% csrf_token %}
+    {{ transaction }}
+    {{ form.as_p }}
+    <input type="submit" value="Αποθήκευση">
+</form>
+{% endblock %}
