@@ -30,7 +30,7 @@ class AlphaBankTransactionsParser:
         transaction_number = fields[5].strip('="')
         amount = float(fields[-3].replace(",", "."))
         amount = -amount if fields[-2] == "Χ" else amount
-        category_id = TransactionCategoryEnum.create_from_description(description).value
+        category_id = TransactionCategoryEnum.create_from_description(description).id
         return TransactionData(
             date=d,
             description=description,

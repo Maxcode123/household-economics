@@ -4,18 +4,26 @@ from enum import Enum
 
 
 class TransactionCategoryEnum(Enum):
-    SUPER_MARKET = 1
-    RENT = 2
-    WATER_BILL = 3
-    POWER_BILL = 4
-    INTERNET_BILL = 5
-    PHONE_BILL = 6
-    PAYROLL = 7
-    BOOKS = 8
-    HOBBIES = 9
-    CASH_WITHDRAWAL = 10
-    OTHER = 11
-    HOUSE_FACILITIES_BILL = 12
+    SUPER_MARKET = {"id": 1, "name": "SUPER_MARKET"}
+    RENT = {"id": 2, "name": "RENT"}
+    WATER_BILL = {"id": 3, "name": "WATER_BILL"}
+    POWER_BILL = {"id": 4, "name": "POWER_BILL"}
+    INTERNET_BILL = {"id": 5, "name": "INTERNET_BILL"}
+    PHONE_BILL = {"id": 6, "name": "PHONE_BILL"}
+    PAYROLL = {"id": 7, "name": "PAYROLL"}
+    BOOKS = {"id": 8, "name": "BOOKS"}
+    HOBBIES = {"id": 9, "name": "HOBBIES"}
+    CASH_WITHDRAWAL = {"id": 10, "name": "CASH_WITHDRAWAL"}
+    OTHER = {"id": 11, "name": "OTHER"}
+    HOUSE_FACILITIES_BILL = {"id": 12, "name": "HOUSE_FACILITIES_BILL"}
+
+    @property
+    def id(self) -> int:
+        return self.value["id"]
+
+    @property
+    def name(self) -> str:
+        return self.value["name"]
 
     @classmethod
     def create_from_description(
