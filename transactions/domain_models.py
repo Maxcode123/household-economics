@@ -4,6 +4,10 @@ from enum import Enum
 
 
 class TransactionCategoryEnum(Enum):
+    """
+    Maps transaction category records from DB.
+    """
+
     SUPER_MARKET = {"id": 1, "name": "SUPER_MARKET"}
     RENT = {"id": 2, "name": "RENT"}
     WATER_BILL = {"id": 3, "name": "WATER_BILL"}
@@ -75,6 +79,10 @@ class TransactionCategoryEnum(Enum):
 
 
 class TransactionData(TypedDict):
+    """
+    Holds the fields that represent a transaction in the business domain.
+    """
+
     date: date
     description: str
     transaction_number: str
