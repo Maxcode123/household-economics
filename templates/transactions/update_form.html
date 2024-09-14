@@ -3,7 +3,21 @@
 {% block content %}
 <form action={% url 'update-transaction-category-endpoint' transaction.id %} method="post">
     {% csrf_token %}
-    {{ transaction }}
+    <p>
+        <b>Ημερομηνία:</b> {{ transaction.date }}
+    </p>
+    <p>
+        <b>Αιτιολογία:</b> {{ transaction.description }}
+    </p>
+    <p>
+        <b>Αρ. Συναλλαγής:</b> {{ transaction.transaction_number }}
+    </p>
+    <p>
+        <b>Ποσό:</b> {{ transaction.amount }}
+    </p>
+    <p>
+        <b>Κατηγορία:</b> {{ transaction.category.name }}
+    </p>
     {{ form.as_p }}
     <input type="submit" value="Αποθήκευση">
 </form>
