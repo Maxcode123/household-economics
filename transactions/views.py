@@ -16,7 +16,10 @@ def index_transaction_view(request: HttpRequest):
 
 
 class UpdateTransactionCategoryForm(Form):
-    category_id = ChoiceField(choices=[(t.id, t.name) for t in TransactionCategoryEnum])
+    category_id = ChoiceField(
+        label="Άλλαξε κατηγορία σε",
+        choices=[(t.id, t.name) for t in TransactionCategoryEnum],
+    )
 
 
 def update_transaction_category_view(request: HttpRequest, transaction_id: int):
