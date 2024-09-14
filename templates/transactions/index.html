@@ -26,7 +26,7 @@
                     <td>{{ transaction.amount }}</td>
                     <td>
                         <div>
-                            <button class='btn btn-secondary' type="submit" onClick='location.href="{% url 'update-transaction-category-view' transaction.id %}"'>
+                            <button class="btn btn-outline-dark" type="submit" onClick='location.href="{% url 'update-transaction-category-view' transaction.id %}"'>
                             {{ transaction.category.name }}        
                             </button>
                         </div>
