@@ -27,4 +27,6 @@ class Command(BaseCommand):
                 Transaction(**data).save()
                 inserted += 1
 
-        self.stdout.write(self.style.SUCCESS(f"Inserted {inserted} records"))
+        style = self.style.SUCCESS if inserted > 0 else self.style.NOTICE
+
+        self.stdout.write(style(f"Inserted {inserted} records"))
