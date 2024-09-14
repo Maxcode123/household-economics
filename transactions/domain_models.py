@@ -1,6 +1,9 @@
 from typing import TypedDict, Iterable
 from datetime import date
 from enum import Enum
+from dataclasses import dataclass
+
+from utils.monthyear import monthyear
 
 
 class TransactionCategoryEnum(Enum):
@@ -28,6 +31,21 @@ class TransactionCategoryEnum(Enum):
     @property
     def name(self) -> str:
         return self.value["name"]
+
+    @classmethod
+    def bill_categories(cls) -> set[dict]:
+        return {
+            cls.RENT.value,
+            cls.WATER_BILL.value,
+            cls.POWER_BILL.value,
+            cls.INTERNET_BILL.value,
+            cls.PHONE_BILL.value,
+            cls.HOUSE_FACILITIES_BILL.value,
+        }
+
+    @classmethod
+    def leisure_categories(cls) -> set[dict]:
+        return {cls.BOOKS, cls.HOBBIES, cls.OTHER}
 
     @classmethod
     def create_from_description(
@@ -87,3 +105,23 @@ class TransactionData(TypedDict):
     description: str
     transaction_number: str
     amount: float
+
+
+@dataclass
+class MonthlyTransactionStatistics:
+    """
+    Contains summary statistics for all the transactions of a month.
+    """
+
+    monthyear: monthyear
+    total_received: float
+    total_spent: float
+    total_spent_in_bills: float
+    total_spent_in_leisure: float
+
+    @property
+    def savings(self) -> float:
+        if self.received == 0:
+            return 0
+
+        return self.received - self.spent
