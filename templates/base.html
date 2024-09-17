@@ -15,7 +15,15 @@
 </head>
 
 <body>
+  <main>
+    <div style="width: 100%; display: flex;">
+      <div style="width: 80%; margin: 0.5%;">
+        <a href="{% url 'index-transactions-view' %}">Συναλλαγές</a></br>
+        <a href="{% url 'index-monthly-transactions-view' %}">Περίληψη Μηνιαίων Συναλλαγών</a>
+      </div>
+    </div>
 
     {% block content %}
     {% endblock %}
+    </main>
 </body>
