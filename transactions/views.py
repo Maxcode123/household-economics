@@ -4,6 +4,7 @@ from django.forms import Form, ChoiceField
 
 from transactions.models import Transaction, TransactionCategory
 from transactions.domain_models import TransactionCategoryEnum
+from transactions.sql_data_providers import MonthlyTransactionStatisticsProvider
 
 
 def index_transaction_view(request: HttpRequest):
@@ -60,3 +61,15 @@ def index_transaction_categories_view(request: HttpRequest):
 
 
 def add_transaction_category_view(request: HttpRequest): ...
+
+
+def index_monthly_transaction_categories_view(request: HttpRequest):
+    """GET /transactions/monthly/"""
+    monthly_stats = (
+        MonthlyTransactionStatisticsProvider.get_monthly_transaction_statistics()
+    )
+    return render(
+        request,
+        "transactions/monthly/index.html",
+        context={"monthly_stats": monthly_stats},
+    )

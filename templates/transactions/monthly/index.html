@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="monthly-transactions-container" style="width: 55%; margin: 0 auto">
+    {% for monthly_stat in monthly_stats %}
+    {% if monthly_stat.stats.savings < 0 %}
+    <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+    {% elif monthly_stat.stats.savings < 500 %}
+    <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+    {% else %}
+    <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+    {% endif %}
+        {% comment %} <div class="card-header"> </div> {% endcomment %}
+        <div class="card-body">
+            <h4 class="card-title">{{ monthly_stat.monthyear }} </h4>
+         <p class="card-text">
+            <b>Σύνολο εσόδων:</b> {{ monthly_stat.stats.total_received }}
+        </p>
+        <p class="card-text">
+            <b>Σύνολο εξόδων:</b> {{ monthly_stat.stats.total_spent}}
+        </p>
+        <p class="card-text">
+            <b>Έξοδα σε λογαριασμούς:</b> {{ monthly_stat.stats.total_spent_in_bills }}
+        </p>
+        <p class="card-text">
+            <b>Λοιπά έξοδα:</b> {{ monthly_stat.stats.total_spent_in_leisure }}
+        </p>
+        <p class="card-text">
+            <b>Αποταμίευση:</b> {{ monthly_stat.stats.savings }}
+        </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
