@@ -33,19 +33,19 @@ class TransactionCategoryEnum(Enum):
         return self.value["name"]
 
     @classmethod
-    def bill_categories(cls) -> set[dict]:
-        return {
+    def bill_categories(cls) -> list[dict]:
+        return [
             cls.RENT.value,
             cls.WATER_BILL.value,
             cls.POWER_BILL.value,
             cls.INTERNET_BILL.value,
             cls.PHONE_BILL.value,
             cls.HOUSE_FACILITIES_BILL.value,
-        }
+        ]
 
     @classmethod
-    def leisure_categories(cls) -> set[dict]:
-        return {cls.BOOKS, cls.HOBBIES, cls.OTHER}
+    def leisure_categories(cls) -> list[dict]:
+        return [cls.BOOKS.value, cls.HOBBIES.value, cls.OTHER.value]
 
     @classmethod
     def create_from_description(
@@ -108,12 +108,11 @@ class TransactionData(TypedDict):
 
 
 @dataclass
-class MonthlyTransactionStatistics:
+class TransactionStatistics:
     """
-    Contains summary statistics for all the transactions of a month.
+    Contains summary statistics for all the transaction in a time period.
     """
 
-    monthyear: monthyear
     total_received: float
     total_spent: float
     total_spent_in_bills: float
@@ -121,7 +120,14 @@ class MonthlyTransactionStatistics:
 
     @property
     def savings(self) -> float:
-        if self.received == 0:
-            return 0
+        return round(self.total_received - self.total_spent, 2)
 
-        return self.received - self.spent
+
+@dataclass
+class MonthlyTransactionStatistics:
+    """
+    Contains summary statistics for all the transactions of a month.
+    """
+
+    monthyear: monthyear
+    stats: TransactionStatistics
